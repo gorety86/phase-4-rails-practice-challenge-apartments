@@ -1,5 +1,8 @@
 class ApartmentsController < ApplicationController
 
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_responce
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
     def index
         apartments = Apartment.all
         render json: apartments 

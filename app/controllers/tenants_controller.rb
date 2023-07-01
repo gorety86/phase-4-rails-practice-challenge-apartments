@@ -1,4 +1,8 @@
 class TenantsController < ApplicationController
+
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_responce
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    
     def index
         render json: Tenant.all
     end

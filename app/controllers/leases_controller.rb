@@ -1,4 +1,6 @@
 class LeasesController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_responce
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     def create
         lease = Lease.create!(lease_params)
         render json: lease, status: :created
